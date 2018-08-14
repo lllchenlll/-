@@ -12,17 +12,17 @@
     谱卷积：
     在一个图中，输入一个n维图信号x（每个图中的节点一个标量），其谱卷积由如下公式表示：
     
-<div align=center><img src="https://latex.codecogs.com/gif.latex?g_{\theta&space;}\star&space;x&space;=&space;Ug_{\theta&space;}U^{\top&space;}x" title="g_{\theta }\star x = Ug_{\theta }U^{\top }x" /><\div>
+<div align=center><img src="https://latex.codecogs.com/gif.latex?g_{\theta&space;}\star&space;x&space;=&space;Ug_{\theta&space;}U^{\top&space;}x" title="g_{\theta }\star x = Ug_{\theta }U^{\top }x" /></div>
   
-        其中，g_{\theta}=diag(\theta)代表滤波器，\theta表示傅里叶域中的n维参数。
+    其中，g_{\theta}=diag(\theta)代表滤波器，\theta表示傅里叶域中的n维参数。
     U为特征分解标准图拉普拉斯矩阵（normalized graph Laplacian）所得的特征向量组成的矩阵，其中：
 
-<div align=center><img src="https://latex.codecogs.com/gif.latex?L^{norm}=I_{n}-D^{-\frac{1}{2}}AD^{-\frac{1}{2}}=U\Lambda&space;U^{\top}" title="L^{norm}=I_{n}-D^{-\frac{1}{2}}AD^{-\frac{1}{2}}=U\Lambda U^{\top}" /><\div>
+<div align=center><img src="https://latex.codecogs.com/gif.latex?L^{norm}=I_{n}-D^{-\frac{1}{2}}AD^{-\frac{1}{2}}=U\Lambda&space;U^{\top}" title="L^{norm}=I_{n}-D^{-\frac{1}{2}}AD^{-\frac{1}{2}}=U\Lambda U^{\top}" /></div>
   
     \Lambda表示特征值矩阵，Ux可视为傅里叶变换，\tilde{x}U^{\top}则为傅里叶逆变换。
     由于特征分解计算复杂度高（o(n^2)），g_{\theta}(\Lambda)被通过使用切比雪夫多项式进行了K阶近似：
 
-<div align=center><img src="https://latex.codecogs.com/gif.latex?g_{\theta'}\star&space;x\approx&space;\sum_{k=0}^{K}\theta'_{k}T_{k}(\tilde{L})x" title="g_{\theta'}\star x\approx \sum_{k=0}^{K}\theta'_{k}T_{k}(\tilde{L})x" /><\div>
+<div align=center><img src="https://latex.codecogs.com/gif.latex?g_{\theta'}\star&space;x\approx&space;\sum_{k=0}^{K}\theta'_{k}T_{k}(\tilde{L})x" title="g_{\theta'}\star x\approx \sum_{k=0}^{K}\theta'_{k}T_{k}(\tilde{L})x" /></div>
   
      其中，\tilde{L}为rescaled的L_{norm}。
         
