@@ -1,5 +1,6 @@
 ## semi-supervised classification with graph convolutional networks
-===================================================================================
+================================================================================
+
 [1-st order approximation GCN](https://arxiv.org/abs/1609.02907)
     
     半监督分类问题：给定图中一小个带标签的集合，通过在损失函数中添加图拉普拉斯正则来将标签信息在图中平滑扩散。
@@ -24,5 +25,23 @@
 
 <div align=center><img src="https://latex.codecogs.com/gif.latex?g_{\theta'}\star&space;x\approx&space;\sum_{k=0}^{K}\theta'_{k}T_{k}(\tilde{L})x" title="g_{\theta'}\star x\approx \sum_{k=0}^{K}\theta'_{k}T_{k}(\tilde{L})x" /></div>
   
-     其中，\tilde{L}为rescaled的L_{norm}。
-        
+     其中，\tilde{L}为rescaled的L_{norm}，调整了特征值大小，\theta是切比雪夫多项式的系数。
+     通过进一步的近似，文中将上述公式中的K阶邻居变为了1阶邻居，并利用\tilde{L}将最大特征值近似为2，那么：
+
+<div align=center><img src="https://latex.codecogs.com/gif.latex?g_{\theta'}\star&space;x\approx&space;\theta'_{0}x&plus;\theta'_{1}(L-I_{n})x=\theta'_{0}x-\theta'_{1}D^{-\frac{1}{2}}AD^{-\frac{1}{2}}x" title="g_{\theta'}\star x\approx \theta'_{0}x+\theta'_{1}(L-I_{n})x=\theta'_{0}x-\theta'_{1}D^{-\frac{1}{2}}AD^{-\frac{1}{2}}x" /></div>
+
+     更进一步近似后（将\theta_{0}和\theta_{1}用同一参数代替）：
+     
+<div align=center><img src="https://latex.codecogs.com/gif.latex?g_{\theta'}\star&space;x\approx&space;\theta(I_{n}&plus;D^{-\frac{1}{2}}AD^{-\frac{1}{2}})x" title="g_{\theta'}\star x\approx \theta(I_{n}+D^{-\frac{1}{2}}AD^{-\frac{1}{2}})x" /></div>
+
+     为了避免重复使用该算子可能会引起的数值不稳定或梯度消失/爆炸，文中使用了再标准化（renormlized）：
+          
+<div align=center><img src="https://latex.codecogs.com/gif.latex?I_{n}&plus;D^{-\frac{1}{2}}AD^{-\frac{1}{2}}\to&space;\tilde{D}^{-\frac{1}{2}}\tilde{A}\tilde{D}^{-\frac{1}{2}}" title="I_{n}+D^{-\frac{1}{2}}AD^{-\frac{1}{2}}\to \tilde{D}^{-\frac{1}{2}}\tilde{A}\tilde{D}^{-\frac{1}{2}}" /></div>
+
+     其中，\tidle(A)表示A+I_{n}，\tilde(D)为\tilde(A）的行元素和。
+     
+     接下来，一次在图上对c个通道的图信号X（X \in R^{n*c}）进行卷积的操作便表示为：
+     
+<div align=center><img src="https://latex.codecogs.com/gif.latex?Z=\tilde{D}^{-\frac{1}{2}}\tilde{A}\tilde{D}^{-\frac{1}{2}}X\Theta" title="Z=\tilde{D}^{-\frac{1}{2}}\tilde{A}\tilde{D}^{-\frac{1}{2}}X\Theta" /></div>
+
+     公式中的\Theta表示参数阵，Z表示卷积后的信号阵。
