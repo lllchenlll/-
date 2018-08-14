@@ -1,6 +1,7 @@
 ## semi-supervised classification with graph convolutional networks
-[1-st order approximation GCN](https://arxiv.org/abs/1609.02907)
 ===================================================================================
+[1-st order approximation GCN](https://arxiv.org/abs/1609.02907)
+    
     半监督分类问题：给定图中一小个带标签的集合，通过在损失函数中添加图拉普拉斯正则来将标签信息在图中平滑扩散。
     PS： 该方法基于一个基本假设，即图中相连的节点更可能共享相同的标签（该基本假设太强，图中的边可能包含一些附加的信息）。
     
