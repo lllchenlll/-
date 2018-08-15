@@ -45,3 +45,5 @@
 <div align=center><img src="https://latex.codecogs.com/gif.latex?Z=\tilde{D}^{-\frac{1}{2}}\tilde{A}\tilde{D}^{-\frac{1}{2}}X\Theta" title="Z=\tilde{D}^{-\frac{1}{2}}\tilde{A}\tilde{D}^{-\frac{1}{2}}X\Theta" /></div>
 
      公式中的\Theta表示参数阵，Z表示卷积后的信号阵。
+     
+     实验主要进行了半监督的图节点分类任务，数据集为cora, citeseer, punmed, nell。
